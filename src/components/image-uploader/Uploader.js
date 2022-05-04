@@ -26,25 +26,25 @@ const Uploader = ({ setImageUrl, imageUrl }) => {
   useEffect(() => {
     const uploadURL = uploadUrl;
     const uploadPreset = upload_Preset;
-    if (files) {
-      files.forEach((file) => {
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', uploadPreset);
-        axios({
-          url: uploadURL,
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          data: formData,
-        })
-          .then((res) => {
-            setImageUrl(res.data.secure_url);
-          })
-          .catch((err) => console.log(err));
-      });
-    }
+    // if (files) {
+    //   files.forEach((file) => {
+    //     const formData = new FormData();
+    //     formData.append('file', file);
+    //     formData.append('upload_preset', uploadPreset);
+    //     axios({
+    //       url: uploadURL,
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/x-www-form-urlencoded',
+    //       },
+    //       data: formData,
+    //     })
+    //       .then((res) => {
+    //         setImageUrl(res.data.secure_url);
+    //       })
+    //       .catch((err) => console.log(err));
+    //   });
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [files]);
 

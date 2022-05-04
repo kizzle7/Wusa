@@ -64,7 +64,7 @@ const routes = [
     component: OrderInvoice,
   },
   {
-    path: '/coupons',
+    path: '/sub_categories',
     component: Coupons,
   },
   { path: '/setting', component: EditProfile },

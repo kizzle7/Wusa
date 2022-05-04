@@ -1,14 +1,13 @@
-import { useContext, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { SidebarContext } from '../context/SidebarContext';
-import CategoryServices from '../services/CategoryServices';
-import { notifyError, notifySuccess } from '../utils/toast';
+import { useContext, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { SidebarContext } from "../context/SidebarContext";
+import CategoryServices from "../services/CategoryServices";
+import { notifyError, notifySuccess } from "../utils/toast";
 
 const useCategorySubmit = (id) => {
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState("");
   const [children, setChildren] = useState([]);
   const { isDrawerOpen, closeDrawer, setIsUpdate } = useContext(SidebarContext);
-
   const {
     register,
     handleSubmit,
@@ -17,21 +16,22 @@ const useCategorySubmit = (id) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = ({ parent, type }) => {
-    if (!imageUrl) {
-      notifyError('Icon is required!');
+  const onSubmit = ({ parent, icon, type }) => {
+    if (!icon) {
+      notifyError("Icon is required!");
       return;
     }
     const categoryData = {
       parent: parent,
-      // slug: slug,
-      type: type,
-      icon: imageUrl,
-      children: children,
+      icon: icon[0],
     };
 
+    let formData = new FormData(); //formdata object
+    formData.append("name", parent);
+    formData.append("icon", icon[0]);
+
     if (id) {
-      CategoryServices.updateCategory(id, categoryData)
+      CategoryServices.updateCategory(id, formData)
         .then((res) => {
           setIsUpdate(true);
           notifySuccess(res.message);
@@ -39,7 +39,7 @@ const useCategorySubmit = (id) => {
         .catch((err) => notifyError(err.message));
       closeDrawer();
     } else {
-      CategoryServices.addCategory(categoryData)
+      CategoryServices.addCategory(formData)
         .then((res) => {
           setIsUpdate(true);
           notifySuccess(res.message);
@@ -51,32 +51,29 @@ const useCategorySubmit = (id) => {
 
   useEffect(() => {
     if (!isDrawerOpen) {
-      setValue('parent');
+      setValue("parent");
       // setValue("slug");
-      setValue('children');
-      setValue('type');
-      setImageUrl('');
+      setValue("children");
+      setValue("type");
+      setImageUrl("");
       setChildren([]);
-      clearErrors('parent');
+      clearErrors("parent");
       // setValue("slug");
-      clearErrors('children');
-      clearErrors('type');
+      clearErrors("children");
+      clearErrors("type");
       return;
     }
     if (id) {
       CategoryServices.getCategoryById(id)
         .then((res) => {
           if (res) {
-            setValue('parent', res.parent);
-            // setValue("slug", res.slug);
-            setChildren(res.children);
-            setValue('type', res.type);
-            setValue('icon', res.icon);
-            setImageUrl(res.icon);
+            setValue("parent", res.result.name);
+            setValue("icon", res.result.icon);
+            setImageUrl(res.result.icon);
           }
         })
         .catch((err) => {
-          notifyError('There is a server error!');
+          notifyError("There is a server error!");
         });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

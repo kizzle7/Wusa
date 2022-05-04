@@ -174,7 +174,7 @@ const useFilter = (data) => {
 
   //pagination functionality start
 
-  const resultsPerPage = 8;
+  const resultsPerPage = 10;
   const totalResults = serviceData.length;
 
   const handleChangePage = (p) => {

@@ -6,7 +6,7 @@ import { AdminContext } from "../context/AdminContext";
 import AdminServices from "../services/AdminServices";
 import { notifyError, notifySuccess } from "../utils/toast";
 
-const useLoginSubmit = (otpValue) => {
+const useLoginSubmit = () => {
   const [loading, setLoading] = useState(false);
   const { dispatch } = useContext(AdminContext);
   const history = useHistory();

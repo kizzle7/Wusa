@@ -17,6 +17,7 @@ import useAsync from '../hooks/useAsync';
 import useFilter from '../hooks/useFilter';
 import NotFound from '../components/table/NotFound';
 import Loading from '../components/preloader/Loading';
+import SelectCategory from '../components/form/SelectCategory';
 import CouponServices from '../services/CouponServices';
 import { SidebarContext } from '../context/SidebarContext';
 import CouponTable from '../components/coupon/CouponTable';
@@ -32,15 +33,17 @@ const Coupons = () => {
     handleSubmitCoupon,
     couponRef,
     dataTable,
+    setFilter,
+
     serviceData,
     totalResults,
     resultsPerPage,
     handleChangePage,
-  } = useFilter(data);
+  } = useFilter(data.result ? data.result : []);
 
   return (
     <>
-      <PageTitle>Coupons</PageTitle>
+      <PageTitle>Sub Catergories</PageTitle>
 
       <MainDrawer>
         <CouponDrawer />
@@ -57,15 +60,18 @@ const Coupons = () => {
                 ref={couponRef}
                 type="search"
                 className="border h-12 text-sm focus:outline-none block w-full bg-gray-100 border-transparent focus:bg-white"
-                placeholder="Search by coupon code/name"
+                placeholder="Search by name"
               />
+            </div>
+            <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
+              <SelectCategory setFilter={setFilter} />
             </div>
             <div className="w-full md:w-56 lg:w-56 xl:w-56">
               <Button onClick={toggleDrawer} className="w-full rounded-md h-12">
                 <span className="mr-3">
                   <FiPlus />
                 </span>
-                Add Coupon
+                Add Sub Category
               </Button>
             </div>
           </form>
@@ -79,18 +85,14 @@ const Coupons = () => {
           <Table>
             <TableHeader>
               <tr>
-                <TableCell>ID</TableCell>
-                <TableCell>Start Date</TableCell>
-                <TableCell>End Date</TableCell>
-                <TableCell>Campaigns Name</TableCell>
-                <TableCell>Code</TableCell>
-                <TableCell>Percentage</TableCell>
-                <TableCell>Product Type</TableCell>
-                <TableCell>Status</TableCell>
+              <TableCell>ID</TableCell>
+                <TableCell>Icon</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell className="">Status</TableCell>
                 <TableCell className="text-right">Actions</TableCell>
               </tr>
             </TableHeader>
-            <CouponTable coupons={dataTable} />
+            <CouponTable subcategoryData={dataTable} />
           </Table>
           <TableFooter>
             <Pagination

@@ -16,23 +16,16 @@ const useCouponSubmit = (id) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    if (!imageUrl) {
-      notifyError('Icon is required!');
-      return;
-    }
-    const CouponData = {
-      title: data.title,
-      couponCode: data.couponCode,
-      endTime: data.endTime,
-      discountPercentage: data.discountPercentage,
-      minimumAmount: data.minimumAmount,
-      productType: data.productType,
-      logo: imageUrl,
-    };
+  const onSubmit = (data, category, icon, title) => {
+  
+    console.log(data)
+    let formData = new FormData(); //formdata object
+    formData.append("name", data.title);
+    formData.append("icon", data.icon[0]);
+    formData.append("categoryId", data.category);
 
     if (id) {
-      CouponServices.updateCoupon(id, CouponData)
+      CouponServices.updateCoupon(id, formData)
         .then((res) => {
           setIsUpdate(true);
           notifySuccess(res.message);
@@ -40,7 +33,7 @@ const useCouponSubmit = (id) => {
         .catch((err) => notifyError(err.message));
       closeDrawer();
     } else {
-      CouponServices.addCoupon(CouponData)
+      CouponServices.addCoupon(formData)
         .then((res) => {
           setIsUpdate(true);
           notifySuccess(res.message);
@@ -71,6 +64,7 @@ const useCouponSubmit = (id) => {
       CouponServices.getCouponById(id)
         .then((res) => {
           if (res) {
+            console.log(res.result);
             setValue('title', res.title);
             setValue('productType', res.productType);
             setValue('couponCode', res.couponCode);

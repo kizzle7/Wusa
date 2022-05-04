@@ -24,22 +24,22 @@ const sidebar = [
   {
     path: '/categories',
     icon: FiShoppingBag,
-    name: 'Category Management',
+    name: 'Categories',
   },
   {
     path: '/sub_categories',
     icon: FiList,
-    name: 'Sub Category ',
+    name: 'SubCategories ',
   },
   {
     path: '/customers',
     icon: FiUsers,
-    name: 'Customer Management',
+    name: 'Customers',
   },
   {
     path: '/products',
     icon: FiCompass,
-    name: 'Products Management',
+    name: 'Products ',
   },
   {
     path: '/orders',
@@ -55,12 +55,12 @@ const sidebar = [
   {
     path: '/our-teams',
     icon: FiUser,
-    name: 'Team Management',
+    name: 'Teams',
   },
   {
     path: '/roles',
     icon: FiUser,
-    name: 'Roles Management',
+    name: 'Roles',
   },
   {
     path: '/options',

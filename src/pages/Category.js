@@ -39,7 +39,7 @@ const Category = () => {
     dataTable,
     serviceData,
     handleSubmitCategory,
-  } = useFilter(data);
+  } = useFilter(data.result ? data.result : []);
 
   return (
     <>
@@ -68,9 +68,8 @@ const Category = () => {
                 className="absolute right-0 top-0 mt-5 mr-1"
               ></button>
             </div>
-            <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
-              <SelectCategory setFilter={setFilter} />
-            </div>
+            
+           
             <div className="w-full md:w-56 lg:w-56 xl:w-56">
               <Button onClick={toggleDrawer} className="w-full rounded-md h-12">
                 <span className="mr-3">
@@ -93,7 +92,7 @@ const Category = () => {
                 <TableCell>ID</TableCell>
                 <TableCell>Icon</TableCell>
                 <TableCell>Name</TableCell>
-                <TableCell className="text-center">Status</TableCell>
+                <TableCell className="">Status</TableCell>
                 <TableCell className="text-right">Actions</TableCell>
               </tr>
             </TableHeader>

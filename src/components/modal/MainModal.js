@@ -26,7 +26,7 @@ const MainModal = ({ id }) => {
       closeModal();
     }
 
-    if (location.pathname === '/category') {
+    if (location.pathname === '/categories') {
       CategoryServices.deleteCategory(id)
         .then((res) => {
           setIsUpdate(true);
