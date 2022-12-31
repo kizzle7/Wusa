@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 import LabelArea from "../components/form/LabelArea";
 import InputArea from "../components/form/InputArea";
 import ImageLight from "../assets/img/wusa.png";
-import ImageDark from "../assets/img/login-office-dark.jpeg";
+import ImageDark from  "../assets/img/wusa.png";
 import useLoginSubmit from "../hooks/useLoginSubmit";
 import { Modal } from "antd";
 import PinInput from "react-pin-input";

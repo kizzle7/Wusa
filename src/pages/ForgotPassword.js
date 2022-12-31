@@ -6,8 +6,8 @@ import Error from '../components/form/Error';
 import useLoginSubmit from '../hooks/useLoginSubmit';
 import LabelArea from '../components/form/LabelArea';
 import InputArea from '../components/form/InputArea';
-import ImageLight from '../assets/img/forgot-password-office.jpeg';
-import ImageDark from '../assets/img/forgot-password-office-dark.jpeg';
+import ImageLight from  "../assets/img/wusa.png";
+import ImageDark from  "../assets/img/wusa.png";
 
 const ForgotPassword = () => {
   const { onSubmit, register, handleSubmit, errors, loading } =
